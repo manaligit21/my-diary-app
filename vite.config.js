@@ -15,7 +15,7 @@ export default defineConfig({
         name: 'My Diary App',
         short_name: 'Diary',
         description: 'Your daily mood and diary tracker',
-        theme_color: '#6b5b95', // lilac purple like your theme
+        theme_color: '#000000ff', // lilac purple like your theme
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
