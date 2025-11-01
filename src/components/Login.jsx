@@ -56,7 +56,7 @@ export default function Login() {
 
         <div className={styles.alt}>
           <span>Don’t have an account?</span>
-          <a className={styles.link} href="/sign-up-page">
+          <a className={styles.link} onClick={()=> navigate("/sign-up-page")}>
             {" "}
             Sign up
           </a>
