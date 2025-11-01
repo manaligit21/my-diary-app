@@ -1,0 +1,58 @@
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    overflow: hidden;
+
+}
+
+.app-body {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #2a2a2a;
+}
+
+.hello{
+    color: #d8d9d2;
+    position: absolute;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+    align-self: flex-start;
+    margin-top: 20%;
+}
+
+.bg {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.add{
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  border-radius: 25px;
+  background: #d8d9d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  align-self: center;
+}
+
+.plusIcon{
+  height: 60%;
+  width: 60%;
+  object-fit: cover;
+}
+

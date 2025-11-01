@@ -1,0 +1,72 @@
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: scroll;
+  background-color: #faf9f6;
+  box-sizing: border-box;
+  background-image: url("../assets/homepage_bg.jpg");
+}
+
+.btn {
+  background-color: #d8d9d2;
+  border: none;
+  border-radius: 8px;
+  padding: 6%;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graph {
+  display: flex;
+  width: 90%;
+  height: 80%;
+  margin: 5% 5%;
+  gap: 2%;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+      background-color: #d8d9d236
+}
+
+.day {
+  width: 10px;
+  background-color: #000000;
+}
+
+.navBtns {
+  width: 80%;
+  margin: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.monthName {
+  font-size: 25px;
+  font-weight: bold;
+  color: #faf9f6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #393939;
+  color: #d8d9d2;
+  padding: 5%;
+  border-radius: 12px;
+  font-size: 22px;
+  width: 80%;
+  margin: 5%;
+}

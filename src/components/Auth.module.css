@@ -1,0 +1,210 @@
+/* Auth.module.css - percent-based, responsive, theme matches your calendar/all-entries pages */
+/* .container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: scroll;
+  background-color: #faf9f6;
+  background-image: url("../assets/homepage_bg.jpg");
+} */
+
+
+:root{
+  --bg: #faf9f6;
+  --card-bg: rgba(216,217,210,0.3); /* pale translucent */
+  --dark: #393939;
+  --accent: #d8d9d2;
+  --text: #eff0e9;
+  --muted: #9a9a9a;
+  --primary:  #d8d9d2;
+  --btn-text: #393939;
+  --input-bg: rgb(36, 36, 36);
+}
+
+/* full screen container (uses background image inherited from app) */
+.screen {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6% 4%;
+  background-color: var(--bg);
+  gap: 2%;
+    background-image: url("../assets/homepage_bg.jpg");
+
+}
+
+/* top row with tiny logo and title - optional */
+.logoRow {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  margin-bottom: 2%;
+}
+
+.logo {
+  height: 6vw;
+  min-height: 28px;
+  max-height: 48px;
+  width: auto;
+  opacity: 0.95;
+}
+
+.appTitle{
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 4vw;
+  min-font-size: 18px;
+}
+
+/* central card */
+.logincard {
+  width: 90%;
+  max-width: 520px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 8%;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+    gap: 5%;
+    height: 60%;
+    justify-content: center;
+}
+
+.signupcard {
+  width: 90%;
+  max-width: 520px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 8%;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+    gap: 5%;
+    height: 80%;
+}
+
+/* headings */
+.title {
+  margin: 0;
+  font-size: 6vw;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 3.2vw;
+}
+
+/* labels and inputs */
+.label {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 4vw;
+  margin-top: 1%;
+}
+
+.input {
+  width: 100%;
+  padding: 3.5% 3%;
+  margin-top: 1%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(216,217,210,0.08);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 3.5vw;
+  outline: none;
+}
+
+/* small row for checkbox / forgot link */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+  gap: 2%;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  color: var(--accent);
+  font-size: 3vw;
+}
+
+.checkboxText {
+  color: var(--accent);
+  font-size: 3vw;
+}
+
+/* button */
+.primaryBtn {
+  margin-top: 1%;
+  width: 100%;
+  padding: 3.5% 0;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: var(--btn-text);
+  font-weight: 700;
+  font-size: 3.8vw;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(57,57,57,0.18);
+}
+
+/* small alternative text */
+.alt {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  align-items: center;
+  color: var(--muted);
+  font-size: 3vw;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* footer */
+.footer {
+  margin-top: 2%;
+  color: var(--muted);
+  font-size: 3vw;
+}
+
+/* responsive tweaks */
+@media (min-width: 600px) {
+  .appTitle { font-size: 20px; }
+  .title { font-size: 20px; }
+  .subtitle { font-size: 14px; }
+  .label, .input, .primaryBtn, .alt, .checkboxText { font-size: 14px; }
+  .logo { height: 36px; }
+}
+
+@media (min-width: 1000px) {
+  .card { max-width: 420px; padding: 4% 5%; }
+  .title { font-size: 22px; }
+  .subtitle { font-size: 14px; }
+}

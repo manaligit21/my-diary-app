@@ -1,0 +1,36 @@
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chartTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #faf9f6;
+}
+
+.pieChart {
+  outline: none;
+}
+
+.pieChart *:focus {
+  outline: none;
+}
+
+.pie {
+  transition: transform 0.2s ease-in-out;
+}
+
+.pie:hover {
+  transform: scale(1.02);
+}
+
+.noEntries {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #faf9f6;
+}
+
