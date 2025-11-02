@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
+import { useLocation, useNavigate, Routes, Route, useEffect } from "react-router-dom";
 import styles from "./App.module.css";
 import backIcon from "./assets/logo.png";
 import homeIcon from "./assets/home.png";
@@ -50,7 +50,7 @@ function App() {
       const minutes = now.getMinutes();
 
       // Trigger exactly at 10:00 PM
-      if (hours === 19 && minutes === 45) {
+      if (hours === 19 && minutes === 50) {
         showNotification();
       }
     };
