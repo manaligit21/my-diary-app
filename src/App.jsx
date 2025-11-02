@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Routes, Route, useEffect } from "react-router-dom";
+import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 import styles from "./App.module.css";
 import backIcon from "./assets/logo.png";
 import homeIcon from "./assets/home.png";
@@ -18,6 +18,8 @@ import CalendarPage from "./components/CalendarPage";
 import { EntriesProvider } from "./GlobalContext/Entries";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import { useEffect } from "react";
+
 
 function App() {
   const location = useLocation();
@@ -50,7 +52,7 @@ function App() {
       const minutes = now.getMinutes();
 
       // Trigger exactly at 10:00 PM
-      if (hours === 19 && minutes === 50) {
+      if (hours === 20 && minutes === 0) {
         showNotification();
       }
     };
