@@ -23,35 +23,66 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const hideHeaderAndNav =
-    location.pathname === "/" ||
-    location.pathname === "/sign-up-page";
+    location.pathname === "/" || location.pathname === "/sign-up-page";
   const goTo = (path) => navigate(path);
+
+  useEffect(() => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        console.log("Notification permission:", permission);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const showNotification = () => {
+      if (Notification.permission === "granted") {
+        new Notification("🌙 Diary Reminder", {
+          body: "It’s 10 PM — time to write about your day 💜",
+          icon: "/vite.svg",
+        });
+      }
+    };
+
+    const checkTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      // Trigger exactly at 10:00 PM
+      if (hours === 22 && minutes === 0) {
+        showNotification();
+      }
+    };
+
+    // Check every minute
+    const interval = setInterval(checkTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles.back}>
-            <img className={styles["back-icon"]} src={backIcon} alt="" />
-          </div>
-          <div className={styles["page-title"]}>Balance</div>
+      <div className={styles.header}>
+        <div className={styles.back}>
+          <img className={styles["back-icon"]} src={backIcon} alt="" />
         </div>
+        <div className={styles["page-title"]}>Balance</div>
+      </div>
 
-    <EntriesProvider>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/entry-page" element={<EntryPage />} />
-        <Route path="/calendar-page" element={<CalendarPage />} />
-        <Route path="/graph-page" element={<GraphPage />} />
-        <Route path="/all-entries-page" element={<AllEntriesPage />} />
-        <Route path="/show-entry-page" element={<ShowEntry />} />
-        <Route path="/home-page" element={<HomePage/>} />
-        <Route path="/sign-up-page" element={<SignUp/>} />
+      <EntriesProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/entry-page" element={<EntryPage />} />
+          <Route path="/calendar-page" element={<CalendarPage />} />
+          <Route path="/graph-page" element={<GraphPage />} />
+          <Route path="/all-entries-page" element={<AllEntriesPage />} />
+          <Route path="/show-entry-page" element={<ShowEntry />} />
+          <Route path="/home-page" element={<HomePage />} />
+          <Route path="/sign-up-page" element={<SignUp />} />
+        </Routes>
+      </EntriesProvider>
 
-      </Routes>
-    </EntriesProvider>
-
-
-{!hideHeaderAndNav && (
+      {!hideHeaderAndNav && (
         <div className={styles["bottom-nav"]}>
           <div
             className={
@@ -63,7 +94,9 @@ function App() {
             <div className={styles["tab"]} onClick={() => goTo("/home-page")}>
               <img
                 className={styles["tab-icon"]}
-                src={location.pathname === "/home-page" ? homeIcon : homeDarkIcon}
+                src={
+                  location.pathname === "/home-page" ? homeIcon : homeDarkIcon
+                }
                 alt=""
               />
             </div>
