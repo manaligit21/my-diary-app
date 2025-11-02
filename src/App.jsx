@@ -50,7 +50,7 @@ function App() {
       const minutes = now.getMinutes();
 
       // Trigger exactly at 10:00 PM
-      if (hours === 19 && minutes === 28) {
+      if (hours === 19 && minutes === 45) {
         showNotification();
       }
     };
@@ -59,6 +59,39 @@ function App() {
     const interval = setInterval(checkTime, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+  let notified = false;
+
+  const showNotification = () => {
+    if (Notification.permission === "granted") {
+      new Notification("🌙 Diary Reminder", {
+        body: "It’s 10 PM — time to write about your day 💜",
+        icon: "/vite.svg",
+      });
+    }
+  };
+
+  const checkTime = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    if (hours === 22 && minutes === 0 && !notified) {
+      showNotification();
+      notified = true;
+    }
+
+    // Reset after 10:01 PM so it can notify next day again
+    if (!(hours === 22 && minutes === 0)) {
+      notified = false;
+    }
+  };
+
+  const interval = setInterval(checkTime, 60000);
+  return () => clearInterval(interval);
+}, []);
+
 
   return (
     <div className={styles.container}>
