@@ -50,7 +50,7 @@ function App() {
       const minutes = now.getMinutes();
 
       // Trigger exactly at 10:00 PM
-      if (hours === 22 && minutes === 0) {
+      if (hours === 19 && minutes === 22) {
         showNotification();
       }
     };
