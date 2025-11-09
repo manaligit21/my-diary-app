@@ -7,7 +7,7 @@ import { useEntries } from "../GlobalContext/Entries";
 
 export default function Login() {
   const {allUsers} = useEntries();
-  const {setUserId} = useEntries()
+  const {setUserId,setCurrentUser} = useEntries()
 
 
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export default function Login() {
 
     if (matchedUser){
       setUserId(matchedUser.id)
+      setCurrentUser(matchedUser)
       navigate("/home-page");
     } else {
       alert("Wrong password or username");

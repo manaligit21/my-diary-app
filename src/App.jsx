@@ -19,6 +19,10 @@ import { EntriesProvider } from "./GlobalContext/Entries";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import { useEffect } from "react";
+import Profile from "./components/Profile";
+import { toggleTheme } from "./store/themeSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 
 
 function App() {
@@ -35,6 +39,15 @@ function App() {
       });
     }
   }, []);
+
+const { mode } = useSelector((state) => state.theme);
+const dispatch =useDispatch()
+  const handleThemeToggle = () => {
+    console.log("theme sjdsalk");
+    
+    dispatch(toggleTheme());
+  };
+
 
   useEffect(() => {
     const showNotification = () => {
@@ -102,6 +115,8 @@ function App() {
           <img className={styles["back-icon"]} src={backIcon} alt="" />
         </div>
         <div className={styles["page-title"]}>Balance</div>
+        <div onClick={handleThemeToggle}>T</div>
+         {!hideHeaderAndNav && (<div className={styles.profile} onClick={()=>navigate('/profile-page')}>User</div>)}
       </div>
 
       <EntriesProvider>
@@ -114,6 +129,7 @@ function App() {
           <Route path="/show-entry-page" element={<ShowEntry />} />
           <Route path="/home-page" element={<HomePage />} />
           <Route path="/sign-up-page" element={<SignUp />} />
+           <Route path="/profile-page" element={<Profile />} />
         </Routes>
       </EntriesProvider>
 

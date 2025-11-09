@@ -7,13 +7,18 @@ import { useEntries } from "../GlobalContext/Entries";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const {allUsers, setAllUsers} = useEntries();
+  const {allUsers, setAllUsers, setUserId, setCurrentUser} = useEntries();
   const USER_API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/users";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const createUser = () => {
+    const temp = allUsers.find((t)=> t.email === email)
+    if (temp){
+      alert("User already exists")
+      return 
+    }
     const newUser = {
       name,
       email,
@@ -29,6 +34,8 @@ export default function SignUp() {
       .then((res) => res.json())
       .then((data) => {
          setAllUsers((prev) => [...prev, data]);
+         setUserId(data.id)
+         setCurrentUser(data)
        });
 
     setName("");

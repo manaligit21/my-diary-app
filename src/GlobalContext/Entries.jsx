@@ -10,7 +10,7 @@ export const EntriesProvider = ({ children }) => {
   const [fromCal, setFromCal] = useState(false);
   const [userId, setUserId] = useState(null)
   const [allUsers, setAllUsers] = useState([]);
-
+ const [currentUser, setCurrentUser] = useState({})
   const COLORS = {
     Awful: "#d83333",
     Bad: "#f39911",
@@ -135,7 +135,7 @@ export const EntriesProvider = ({ children }) => {
 
   return (
     <EntriesContext.Provider
-      value={{ allUsers, setAllUsers, entries, setEntries, currentIndex, setCurrentIndex, fromCal, setFromCal, COLORS, userId, setUserId }}
+      value={{ allUsers, setAllUsers, entries, setEntries, currentIndex, setCurrentIndex, fromCal, setFromCal, COLORS, userId, setUserId, setCurrentUser,currentUser }}
     >
       {children}
     </EntriesContext.Provider>

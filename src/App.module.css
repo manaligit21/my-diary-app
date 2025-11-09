@@ -94,3 +94,9 @@ body {
   justify-content: center;
 }
 
+
+.profile{
+  color: #000;
+  justify-self: end;
+  margin-left: 45%;
+}
