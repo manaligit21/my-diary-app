@@ -14,10 +14,10 @@
 }
 
 .noentry{
-    background-color: #d8d9d236;
+    background-color:  var(--primary-bg)36;
     width: 90%;
     padding: 5%;
-    color: #d8d9d2;
+    color:  var(--primary-bg);
     font-weight: bold;
     box-sizing: border-box;
     display: flex;
@@ -42,7 +42,7 @@
   border: 1px solid rgba(255, 255, 255); /* subtle border */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* gives clean definition */
   overflow: hidden;
-  background-color: #d8d9d236;
+  background-color:  var(--primary-bg)36;
 }
 
 .dateTime {
@@ -67,7 +67,7 @@
 .text {
   margin-top: 8%;
   padding: 2%;
-  color: #d8d9d2;
+  color:  var(--primary-bg);
   word-break: break-word;
 }
 
@@ -110,7 +110,7 @@
   font-weight: bold;
   margin-bottom: 10px;
   background-color: #393939;
-  color: #d8d9d2;
+  color:  var(--primary-bg);
   padding: 5%;
   border-radius: 12px;
   font-size: 22px;
@@ -126,7 +126,7 @@
 }
 
 .btn {
-  background-color: #d8d9d2;
+  background-color:  var(--primary-bg);
   border: none;
   border-radius: 8px;
   padding: 6%;

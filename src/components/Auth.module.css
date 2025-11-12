@@ -16,13 +16,11 @@
 
 
 :root{
-  --bg: #faf9f6;
   --card-bg: rgba(216,217,210,0.3); /* pale translucent */
   --dark: #393939;
-  --accent: #d8d9d2;
-  --text: #eff0e9;
-  --muted: #9a9a9a;
-  --primary:  #d8d9d2;
+  --accent:  var(--primary-bg);
+  --muted: var(--primary-bg);
+  --primary:   var(--primary-bg);
   --btn-text: #393939;
   --input-bg: rgb(36, 36, 36);
 }
@@ -101,7 +99,7 @@
 .title {
   margin: 0;
   font-size: 6vw;
-  color: var(--text);
+  color:  var(--primary-bg);
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -114,7 +112,7 @@
 
 /* labels and inputs */
 .label {
-  color: var(--accent);
+  color: var(--primary-bg);
   font-weight: 600;
   font-size: 4vw;
   margin-top: 1%;
@@ -128,7 +126,7 @@
   border-radius: 8px;
   border: 1px solid rgba(216,217,210,0.08);
   background: var(--input-bg);
-  color: var(--text);
+  color: var(--primary-bg);
   font-size: 3.5vw;
   outline: none;
 }
@@ -162,7 +160,7 @@
   padding: 3.5% 0;
   border-radius: 8px;
   border: none;
-  background: var(--primary);
+  background: var(--primary-bg);
   color: var(--btn-text);
   font-weight: 700;
   font-size: 3.8vw;

@@ -23,8 +23,6 @@ import Profile from "./components/Profile";
 import { toggleTheme } from "./store/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-
-
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,14 +38,12 @@ function App() {
     }
   }, []);
 
-const { mode } = useSelector((state) => state.theme);
-const dispatch =useDispatch()
-  const handleThemeToggle = () => {
-    console.log("theme sjdsalk");
-    
-    dispatch(toggleTheme());
-  };
+  const dispatch = useDispatch();
+  const { mode } = useSelector((state) => state.theme);
 
+  useEffect(() => {
+    document.body.setAttribute("data-theme", mode);
+  }, [mode]);
 
   useEffect(() => {
     const showNotification = () => {
@@ -76,37 +72,36 @@ const dispatch =useDispatch()
   }, []);
 
   useEffect(() => {
-  let notified = false;
+    let notified = false;
 
-  const showNotification = () => {
-    if (Notification.permission === "granted") {
-      new Notification("🌙 Diary Reminder", {
-        body: "It’s 10 PM — time to write about your day 💜",
-        icon: "/vite.svg",
-      });
-    }
-  };
+    const showNotification = () => {
+      if (Notification.permission === "granted") {
+        new Notification("🌙 Diary Reminder", {
+          body: "It’s 10 PM — time to write about your day 💜",
+          icon: "/vite.svg",
+        });
+      }
+    };
 
-  const checkTime = () => {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
+    const checkTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
 
-    if (hours === 22 && minutes === 0 && !notified) {
-      showNotification();
-      notified = true;
-    }
+      if (hours === 22 && minutes === 0 && !notified) {
+        showNotification();
+        notified = true;
+      }
 
-    // Reset after 10:01 PM so it can notify next day again
-    if (!(hours === 22 && minutes === 0)) {
-      notified = false;
-    }
-  };
+      // Reset after 10:01 PM so it can notify next day again
+      if (!(hours === 22 && minutes === 0)) {
+        notified = false;
+      }
+    };
 
-  const interval = setInterval(checkTime, 60000);
-  return () => clearInterval(interval);
-}, []);
-
+    const interval = setInterval(checkTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -115,8 +110,18 @@ const dispatch =useDispatch()
           <img className={styles["back-icon"]} src={backIcon} alt="" />
         </div>
         <div className={styles["page-title"]}>Balance</div>
-        <div onClick={handleThemeToggle}>T</div>
-         {!hideHeaderAndNav && (<div className={styles.profile} onClick={()=>navigate('/profile-page')}>User</div>)}
+
+        {/* Toggle Button */}
+        <div style={{cursor:"pointer"} }onClick={() => dispatch(toggleTheme())}>T</div>
+
+        {!hideHeaderAndNav && (
+          <div
+            className={styles.profile}
+            onClick={() => navigate("/profile-page")}
+          >
+            User
+          </div>
+        )}
       </div>
 
       <EntriesProvider>
@@ -129,7 +134,7 @@ const dispatch =useDispatch()
           <Route path="/show-entry-page" element={<ShowEntry />} />
           <Route path="/home-page" element={<HomePage />} />
           <Route path="/sign-up-page" element={<SignUp />} />
-           <Route path="/profile-page" element={<Profile />} />
+          <Route path="/profile-page" element={<Profile />} />
         </Routes>
       </EntriesProvider>
 

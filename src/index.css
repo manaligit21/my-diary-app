@@ -1,3 +1,12 @@
+:root {
+  --primary-bg: #d8d9d2; /* light mode */
+  --text: #393939;
+}
+
+[data-theme="dark"] {
+  --primary-bg: #a2e9f0;
+  --text: #393939;
+}
 
 img {
   max-width: 100%;

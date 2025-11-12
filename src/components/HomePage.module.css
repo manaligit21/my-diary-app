@@ -22,7 +22,7 @@
 }
 
 .hello{
-    color: #d8d9d2;
+    color:  var(--primary-bg);
     position: absolute;
     font-weight: 600;
     font-size: 30px;
@@ -42,7 +42,7 @@
   width: 50px;
   position: absolute;
   border-radius: 25px;
-  background: #d8d9d2;
+  background:  var(--primary-bg);
   display: flex;
   align-items: center;
   justify-content: center;
