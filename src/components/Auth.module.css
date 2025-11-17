@@ -1,26 +1,9 @@
-/* Auth.module.css - percent-based, responsive, theme matches your calendar/all-entries pages */
-/* .container {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: scroll;
-  background-color: #faf9f6;
-  background-image: url("../assets/homepage_bg.jpg");
-} */
-
-
 :root{
   --card-bg: rgba(216,217,210,0.3); /* pale translucent */
   --dark: #393939;
-  --accent:  var(--primary-bg);
-  --muted: var(--primary-bg);
-  --primary:   var(--primary-bg);
+  --accent:  rgba(var(--primary-bg));
+  --muted: rgba(var(--primary-bg));
+  --primary:   rgba(var(--primary-bg));
   --btn-text: #393939;
   --input-bg: rgb(36, 36, 36);
 }
@@ -99,7 +82,7 @@
 .title {
   margin: 0;
   font-size: 6vw;
-  color:  var(--primary-bg);
+  color:  rgba(var(--primary-bg));
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -112,7 +95,7 @@
 
 /* labels and inputs */
 .label {
-  color: var(--primary-bg);
+  color: rgba(var(--primary-bg));
   font-weight: 600;
   font-size: 4vw;
   margin-top: 1%;
@@ -126,7 +109,7 @@
   border-radius: 8px;
   border: 1px solid rgba(216,217,210,0.08);
   background: var(--input-bg);
-  color: var(--primary-bg);
+  color: rgba(var(--primary-bg));
   font-size: 3.5vw;
   outline: none;
 }
@@ -160,7 +143,7 @@
   padding: 3.5% 0;
   border-radius: 8px;
   border: none;
-  background: var(--primary-bg);
+  background: rgba(var(--primary-bg));
   color: var(--btn-text);
   font-weight: 700;
   font-size: 3.8vw;

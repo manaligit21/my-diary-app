@@ -14,11 +14,11 @@
 
 .wrapper {
   margin: 5%;
-  color:  var(--primary-bg);
+  color:  rgba(var(--primary-bg));
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color:  var(--primary-bg)36;
+  background-color:  rgba(var(--primary-bg), 0.3);
   border: 1px solid white;
 }
 
@@ -55,7 +55,7 @@
   font-size: 95%;
   padding: 3%;
   background: #000000a3;
-  color:  var(--primary-bg);
+  color:  rgba(var(--primary-bg));
 }
 
 .input-label {

@@ -31,6 +31,6 @@
   text-align: center;
   margin-top: 2rem;
   font-size: 1rem;
-  color: var(--primary-bg);
+  color: rgba(var(--primary-bg));
 }
 

@@ -21,7 +21,7 @@ body {
 
 .header {
   width: 100%;
-  background: var(--primary-bg);
+  background: rgba(var(--primary-bg));
   color: 393939;
   font-weight: 600;
   font-size: 20px;
@@ -61,7 +61,7 @@ body {
 }
 
 .bottom-nav {
-  background:  var(--primary-bg);
+  background:  rgba(var(--primary-bg));
   display: flex;
   /* padding: 2% 9%; */
   justify-content: space-between;
@@ -80,7 +80,7 @@ body {
 
 .item-wrapper {
   width: 25%;
-  background:  var(--primary-bg);
+  background:  rgba(var(--primary-bg));
   display: flex;
   align-items: center;
   justify-content: center;

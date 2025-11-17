@@ -30,78 +30,12 @@ function App() {
     location.pathname === "/" || location.pathname === "/sign-up-page";
   const goTo = (path) => navigate(path);
 
-  useEffect(() => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        console.log("Notification permission:", permission);
-      });
-    }
-  }, []);
-
   const dispatch = useDispatch();
   const { mode } = useSelector((state) => state.theme);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", mode);
   }, [mode]);
-
-  useEffect(() => {
-    const showNotification = () => {
-      if (Notification.permission === "granted") {
-        new Notification("🌙 Diary Reminder", {
-          body: "It’s 10 PM — time to write about your day 💜",
-          icon: "/vite.svg",
-        });
-      }
-    };
-
-    const checkTime = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-
-      // Trigger exactly at 10:00 PM
-      if (hours === 20 && minutes === 0) {
-        showNotification();
-      }
-    };
-
-    // Check every minute
-    const interval = setInterval(checkTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    let notified = false;
-
-    const showNotification = () => {
-      if (Notification.permission === "granted") {
-        new Notification("🌙 Diary Reminder", {
-          body: "It’s 10 PM — time to write about your day 💜",
-          icon: "/vite.svg",
-        });
-      }
-    };
-
-    const checkTime = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-
-      if (hours === 22 && minutes === 0 && !notified) {
-        showNotification();
-        notified = true;
-      }
-
-      // Reset after 10:01 PM so it can notify next day again
-      if (!(hours === 22 && minutes === 0)) {
-        notified = false;
-      }
-    };
-
-    const interval = setInterval(checkTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -112,7 +46,12 @@ function App() {
         <div className={styles["page-title"]}>Balance</div>
 
         {/* Toggle Button */}
-        <div style={{cursor:"pointer"} }onClick={() => dispatch(toggleTheme())}>T</div>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => dispatch(toggleTheme())}
+        >
+          T
+        </div>
 
         {!hideHeaderAndNav && (
           <div
