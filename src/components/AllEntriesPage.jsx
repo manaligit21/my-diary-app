@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./AllEntriesPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
@@ -9,7 +9,7 @@ export default function AllEntriesPage() {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth(); // 0-based
   const monthName = currentDate.toLocaleString("default", { month: "long" });
-  const daysInMonth = new Date(year, month + 1, 0).getDate();  
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
   const { entries, setCurrentIndex, COLORS } = useEntries();
 
   const entryDates = entries.map((entry, index) => ({
@@ -28,19 +28,13 @@ export default function AllEntriesPage() {
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
 
-
-
-  for (let d = 0; d <= daysInMonth; d++) {
+  for (let d = 1; d <= daysInMonth; d++) {
     daysArray.push(d);
   }
 
-  let monthMatches = {}
-  for (let i = 0; i<daysArray.length; i++){
-    
-     monthMatches = entryDates.find(
-      (e) => e.month === month && e.year === year
-    )
-    
+  let monthMatches = {};
+  for (let i = 0; i < daysArray.length; i++) {
+    monthMatches = entryDates.find((e) => e.month === month && e.year === year);
   }
 
   const photoClicked = (index) => {
@@ -49,6 +43,22 @@ export default function AllEntriesPage() {
     navigate("/show-entry-page");
   };
 
+  const todayRef = useRef();
+
+  useEffect(() => {
+    if (todayRef.current) {
+      todayRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, []);
+  const today = new Date();
+  const todayDate = today.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   const [clicked, setClicked] = useState(false);
   return (
     <div className={styles.container}>
@@ -69,40 +79,38 @@ export default function AllEntriesPage() {
             const match = entryDates.find(
               (e) => e.day === day && e.month === month && e.year === year
             );
-            if (match) {
-              return (
-                <div
-                  key={index}
-                  className={styles.entry}
-                  onClick={() => photoClicked(match.entryIndex)}
-                >
-                  <div className={styles.dateTime}>
-                    <div className={styles.date}>{match ? match.date : ""}</div>
-                    <div className={styles.time}>{match ? match.time : ""}</div>
-                  </div>
-                  <div className={styles.text}>{match.entryText}</div>
-                  {match ? (
-                    match.media && (
-                      <div className={styles.media}>
-                        <img
-                          className={styles.photo}
-                          src={match.media}
-                          alt=""
-                        />
-                      </div>
-                    )
-                  ) : (
-                    <div></div>
-                  )}
-                  <div
-                    className={styles.mood}
-                    style={{ background: COLORS[match.mood] }}
-                  >
-                    {match.mood}
-                  </div>
+
+            if (!match) return null;
+            const isToday = match.date === todayDate;
+
+            return (
+              <div
+                key={index}
+                ref={isToday ? todayRef : null}
+                className={styles.entry}
+                onClick={() => photoClicked(match.entryIndex)}
+              >
+                <div className={styles.dateTime}>
+                  <div className={styles.date}>{match.date}</div>
+                  <div className={styles.time}>{match.time}</div>
                 </div>
-              );
-            }
+
+                <div className={styles.text}>{match.entryText}</div>
+
+                {match.media && (
+                  <div className={styles.media}>
+                    <img className={styles.photo} src={match.media} alt="" />
+                  </div>
+                )}
+
+                <div
+                  className={styles.mood}
+                  style={{ background: COLORS[match.mood] }}
+                >
+                  {match.mood}
+                </div>
+              </div>
+            );
           })
         ) : (
           <div className={styles.noentry}>No Entries</div>
