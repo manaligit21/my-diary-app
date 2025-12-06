@@ -22,8 +22,9 @@ import { useEffect } from "react";
 import Profile from "./components/Profile";
 import { toggleTheme } from "./store/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
-
+import GoogleLoginPage from "./components/GoogleLogin";
 function App() {
+  const profilePhoto = localStorage.getItem("profilePhoto");
   const location = useLocation();
   const navigate = useNavigate();
   const hideHeaderAndNav =
@@ -58,14 +59,25 @@ function App() {
             className={styles.profile}
             onClick={() => navigate("/profile-page")}
           >
-            User
+            <div className={styles.logOut}>
+              <img
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: "15px",
+                  border: "solid 2px",
+                }}
+                src={profilePhoto}
+                alt=""
+              />
+            </div>
           </div>
         )}
       </div>
 
       <EntriesProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login-page" element={<Login />} />
           <Route path="/entry-page" element={<EntryPage />} />
           <Route path="/calendar-page" element={<CalendarPage />} />
           <Route path="/graph-page" element={<GraphPage />} />
@@ -74,6 +86,7 @@ function App() {
           <Route path="/home-page" element={<HomePage />} />
           <Route path="/sign-up-page" element={<SignUp />} />
           <Route path="/profile-page" element={<Profile />} />
+          <Route path="/" element={<GoogleLoginPage />} />
         </Routes>
       </EntriesProvider>
 

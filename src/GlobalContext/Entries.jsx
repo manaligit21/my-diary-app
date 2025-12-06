@@ -3,14 +3,15 @@ import { db } from "../firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 
 const EntriesContext = createContext();
-const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries"
+const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries";
 
 export const EntriesProvider = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fromCal, setFromCal] = useState(false);
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
- const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
+  const [profiePhoto, setProfilePhoto] = useState("");
   const COLORS = {
     Awful: "#d83333",
     Bad: "#f39911",
@@ -20,25 +21,25 @@ export const EntriesProvider = ({ children }) => {
   };
 
   const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-    const USER_API_URL =
+  const USER_API_URL =
     "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/users";
 
-    useEffect(() => {
-      fetch(USER_API_URL)
-        .then((res) => res.json())
-        .then((data) => {
+  useEffect(() => {
+    fetch(USER_API_URL)
+      .then((res) => res.json())
+      .then((data) => {
         setAllUsers(data);
       });
   }, []);
 
-
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
-      .then((data) => setEntries(data.filter(entry => entry.userId == userId)))
-      .catch((err) => console.log("EroR",err));
+      .then((data) =>
+        setEntries(data.filter((entry) => entry.userId == userId))
+      )
+      .catch((err) => console.log("EroR", err));
   }, [userId]);
 
   // Example entries
@@ -130,12 +131,28 @@ export const EntriesProvider = ({ children }) => {
   //   "mood": "Awful",
   //   "imgUrl": "/assets/entries/two.jpg",
   //   "id": "11"
-  // }  
+  // }
   // ];
 
   return (
     <EntriesContext.Provider
-      value={{ allUsers, setAllUsers, entries, setEntries, currentIndex, setCurrentIndex, fromCal, setFromCal, COLORS, userId, setUserId, setCurrentUser,currentUser }}
+      value={{
+        profiePhoto,
+        setProfilePhoto,
+        allUsers,
+        setAllUsers,
+        entries,
+        setEntries,
+        currentIndex,
+        setCurrentIndex,
+        fromCal,
+        setFromCal,
+        COLORS,
+        userId,
+        setUserId,
+        setCurrentUser,
+        currentUser,
+      }}
     >
       {children}
     </EntriesContext.Provider>
