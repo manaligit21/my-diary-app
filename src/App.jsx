@@ -77,14 +77,12 @@ function App() {
 
       <EntriesProvider>
         <Routes>
-          <Route path="/login-page" element={<Login />} />
           <Route path="/entry-page" element={<EntryPage />} />
           <Route path="/calendar-page" element={<CalendarPage />} />
           <Route path="/graph-page" element={<GraphPage />} />
           <Route path="/all-entries-page" element={<AllEntriesPage />} />
           <Route path="/show-entry-page" element={<ShowEntry />} />
           <Route path="/home-page" element={<HomePage />} />
-          <Route path="/sign-up-page" element={<SignUp />} />
           <Route path="/profile-page" element={<Profile />} />
           <Route path="/" element={<GoogleLoginPage />} />
         </Routes>
