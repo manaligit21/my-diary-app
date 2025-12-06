@@ -16,8 +16,6 @@ import AllEntriesPage from "./components/AllEntriesPage";
 import ShowEntry from "./components/ShowEntry";
 import CalendarPage from "./components/CalendarPage";
 import { EntriesProvider } from "./GlobalContext/Entries";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
 import { useEffect } from "react";
 import Profile from "./components/Profile";
 import { toggleTheme } from "./store/themeSlice";
