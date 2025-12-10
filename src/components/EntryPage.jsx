@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./EntryPage.module.css";
-import { db, storage } from "../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 
@@ -10,11 +7,9 @@ function EntryPage() {
   const [entryText, setEntryText] = useState("");
   const [mood, setMood] = useState("");
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const { setCurrentIndex, setEntries, userId } = useEntries();
-  const [date, setDate] =useState('')
-  const [data,setData] = useState([])
+  const { setEntries, userId } = useEntries();
+  const [date, setDate] = useState("");
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const moods = [
     { label: "Awful", color: "#d83333" },
@@ -23,13 +18,13 @@ function EntryPage() {
     { label: "Nice", color: "#439948" },
     { label: "Awesome", color: "#15568b" },
   ];
-    const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries";
+  const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries";
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(API_URL)
-    .then((res)=>res.json())
-    .then((data)=>setData(data))
-  },[])
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
 
   const optionSelected = (mood) => {
     console.log(mood);
@@ -58,13 +53,13 @@ function EntryPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const selectedDate = new Date(date).toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    if (data.find((i)=> i.date === selectedDate )){
-      alert("alreday have entry for this date")
-      return 
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+    if (data.find((i) => i.date === selectedDate)) {
+      alert("alreday have entry for this date");
+      return;
     }
     const newEntry = {
       entryText,
@@ -119,11 +114,12 @@ function EntryPage() {
       <div className={styles.wrapper}>
         <div className={styles.date}>
           Select the date
-        <input value={date}  
-        onChange={(e)=>
-          setDate(e.target.value)
-        } className={styles.datetab} type="date"/>
-
+          <input
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className={styles.datetab}
+            type="date"
+          />
         </div>
 
         <div className={styles["enter-text"]}>

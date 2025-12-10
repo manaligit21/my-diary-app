@@ -62,8 +62,8 @@ function App() {
                 style={{
                   height: "100%",
                   width: "100%",
-                  borderRadius: "15px",
-                  border: "solid 2px",
+                  borderRadius: "50%",
+                  border: "solid 1px",
                 }}
                 src={profilePhoto}
                 alt=""

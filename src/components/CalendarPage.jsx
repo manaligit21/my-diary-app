@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
-import styles from "./CalendarPage.module.css";
+import styles from "./AllEntriesPage.module.css";
+import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
-import { useFetcher, useNavigate } from "react-router-dom";
+import { increment, decrement } from "../store/month";
+import { useSelector, useDispatch } from "react-redux";
 
 function CalendarPage() {
   const navigate = useNavigate();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth(); // 0-based
-  const monthName = currentDate.toLocaleString("default", { month: "long" });
-  const firstDay = new Date(year, month, 1).getDay(); // 0 = Sunday
+  const dispatch = useDispatch();
+  const year = useSelector((state) => state.month.year);
+  const month = useSelector((state) => state.month.month);
+  const monthName = new Date(year, month, 1).toLocaleString("default", {
+    month: "long",
+  });
   const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay(); // 0 = Sunday
+
   const { setFromCal } = useEntries();
 
   const { entries, setCurrentIndex, COLORS } = useEntries();
@@ -18,22 +22,18 @@ function CalendarPage() {
     day: new Date(entry.date).getDate(),
     month: new Date(entry.date).getMonth(),
     year: new Date(entry.date).getFullYear(),
-    entryIndex : index,
+    entryIndex: index,
     mood: entry.mood,
   }));
-  
+
   const daysArray = [];
   function openEntry(index) {
-    if (index>=0){
-    setCurrentIndex(index);
-    setFromCal(true);
-    navigate("/show-entry-page");
+    if (index >= 0) {
+      setCurrentIndex(index);
+      setFromCal(true);
+      navigate("/show-entry-page");
     }
   }
-
-  // Month navigation
-  const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
-  const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
 
   for (let i = 0; i < firstDay; i++) daysArray.push(null); // empty for offset
   for (let d = 1; d <= daysInMonth; d++) daysArray.push(d);
@@ -42,13 +42,23 @@ function CalendarPage() {
     <div className={styles.container}>
       <div className={styles.calendar}>
         <div className={styles.header}>
-          <button className={styles.btn} onClick={prevMonth}>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              dispatch(decrement());
+            }}
+          >
             ◀
           </button>
           <div>
             {monthName} {year}
           </div>
-          <button className={styles.btn} onClick={nextMonth}>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              dispatch(increment());
+            }}
+          >
             ▶
           </button>
         </div>
@@ -70,7 +80,7 @@ function CalendarPage() {
 
             return (
               <div
-                onClick={() => openEntry(match ? match.entryIndex : -1 )}
+                onClick={() => openEntry(match ? match.entryIndex : -1)}
                 key={index}
                 className={styles.day}
                 style={{

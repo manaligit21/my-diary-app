@@ -1,4 +1,3 @@
-import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { useEntries } from "../GlobalContext/Entries";
 import styles from "./MoodPieChart.module.css";
@@ -23,7 +22,6 @@ export default function MoodPieChart({ month, year }) {
     value: moodCounts[mood],
   }));
 
-
   if (data.length === 0) {
     return <div className={styles.noEntries}>No entries this month</div>;
   }
@@ -31,9 +29,12 @@ export default function MoodPieChart({ month, year }) {
   return (
     <div className={styles.chartContainer}>
       <h3 className={styles.chartTitle}>
-        {`Mood Distribution - ${new Date(year, month).toLocaleString("default", {
-          month: "long",
-        })}`}
+        {`Mood Distribution - ${new Date(year, month).toLocaleString(
+          "default",
+          {
+            month: "long",
+          }
+        )}`}
       </h3>
       <PieChart width={320} height={320} className={styles.pieChart}>
         <Pie

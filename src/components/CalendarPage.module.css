@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-.weekdays{
+.weekdays {
   margin: 10% 5% 0 5%;
   display: grid;
   font-size: 17px;
@@ -42,7 +42,7 @@
 }
 
 .day {
-  border: 1px white solid ;
+  border: 1px white solid;
   padding: 8px;
   margin: 2px;
   border-radius: 10%;
@@ -50,7 +50,6 @@
   color: #ffffff;
   font-weight: bold;
 }
-
 
 .navBtns {
   width: 80%;
@@ -71,7 +70,7 @@
   align-items: center;
   font-weight: bold;
   background-color: #393939;
-  color:  rgba(var(--primary-bg));
+  color: rgba(var(--primary-bg));
   padding: 5%;
   border-radius: 12px;
   font-size: 22px;
@@ -79,15 +78,13 @@
   margin: 5%;
 }
 
-
-
 .empty {
   background: none;
   cursor: default;
 }
 
 .btn {
-  background-color:  rgba(var(--primary-bg));
+  background-color: rgba(var(--primary-bg));
   border: none;
   border-radius: 8px;
   padding: 6%;

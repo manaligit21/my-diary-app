@@ -5,8 +5,6 @@ import { useEntries } from "../GlobalContext/Entries";
 
 function Profile() {
   const navigate = useNavigate();
-  const savedPhoto = localStorage.getItem("profilePhoto");
-
   const { setUserId, currentUser, setCurrentUser } = useEntries();
 
   const back = () => {

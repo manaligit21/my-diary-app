@@ -73,14 +73,23 @@ function GoogleLoginPage() {
         backgroundImage: `url(${bg})`,
       }}
     >
-      <div style={{ display: "flex" }}>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <button
           onClick={() => login()}
           style={{
-            padding: "10px 20px",
-            backgroundColor: "#4285F4",
-            color: "#fff",
+            padding: "4%",
+            width: "60%",
+            backgroundColor: "rgb(83 100 203)",
+            color: "rgb(255 251 251)",
             border: "none",
+            fontWeight: "bold",
             borderRadius: "4px",
             cursor: "pointer",
           }}

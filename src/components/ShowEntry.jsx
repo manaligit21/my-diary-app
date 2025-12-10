@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEntries } from "../GlobalContext/Entries";
 import styles from "./ShowEntry.module.css"; // ✅
 import { useLocation, useNavigate } from "react-router-dom";
 import backIcon from "../assets/back.png";
-import { useEffect } from "react";
 function ShowEntry() {
   const navigate = useNavigate();
   const { entries, currentIndex, COLORS } = useEntries();
@@ -30,11 +29,10 @@ function ShowEntry() {
   return (
     <div className={styles.container}>
       <div className={styles.entries}>
-        
         <div className={styles.entry} onClick={photoClicked}>
           <div className={styles.back} onClick={back}>
-          <img className={styles.backIcon} src={backIcon} alt="" />
-        </div>
+            <img className={styles.backIcon} src={backIcon} alt="" />
+          </div>
           <div className={styles.dateTime}>
             <div className={styles.date}>{currentEntry.date}</div>
             <div className={styles.time}>{currentEntry.time}</div>

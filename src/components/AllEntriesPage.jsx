@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./AllEntriesPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
+import { increment, decrement } from "../store/month";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function AllEntriesPage() {
   const navigate = useNavigate();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth(); // 0-based
-  const monthName = currentDate.toLocaleString("default", { month: "long" });
+  const dispatch = useDispatch();
+  const year = useSelector((state) => state.month.year);
+  const month = useSelector((state) => state.month.month);
+  const monthName = new Date(year, month, 1).toLocaleString("default", {
+    month: "long",
+  });
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const { entries, setCurrentIndex, COLORS } = useEntries();
 
@@ -23,10 +27,6 @@ export default function AllEntriesPage() {
   }));
 
   const daysArray = [];
-
-  // Month navigation
-  const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
-  const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
 
   for (let d = 1; d <= daysInMonth; d++) {
     daysArray.push(d);
@@ -63,13 +63,13 @@ export default function AllEntriesPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <button className={styles.btn} onClick={prevMonth}>
+        <button className={styles.btn} onClick={() => dispatch(decrement())}>
           ◀
         </button>
         <div>
           {monthName} {year}
         </div>
-        <button className={styles.btn} onClick={nextMonth}>
+        <button className={styles.btn} onClick={() => dispatch(increment())}>
           ▶
         </button>
       </div>
