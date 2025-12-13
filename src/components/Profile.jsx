@@ -1,5 +1,7 @@
 import styles from "./Profile.module.css"; // ✅
 import backIcon from "../assets/back.png";
+import t from "../assets/theme.png";
+
 import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 
@@ -11,6 +13,21 @@ function Profile() {
     navigate("/home-page");
   };
 
+  const handleColorChange = (e) => {
+    const hex = e.target.value;
+
+    // Convert HEX to RGB
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    // Update CSS variable
+    document.documentElement.style.setProperty(
+      "--primary-bg",
+      `${r}, ${g}, ${b}`
+    );
+  };
+
   const logout = () => {
     setUserId("");
     setCurrentUser({});
@@ -20,9 +37,16 @@ function Profile() {
   return (
     <div className={styles.screen}>
       <div className={styles.profileCard}>
-        <div className={styles.back} onClick={back}>
-          <img className={styles.backIcon} src={backIcon} alt="" />
+        <div className={styles.top}>
+          <div className={styles.back} onClick={back}>
+            <img className={styles.backIcon} src={backIcon} alt="" />
+          </div>
+          <div className={styles.switch}>
+            <input id='colorPicker' onChange={handleColorChange} className={styles.color} type="color" />
+            <label className={styles.lab} htmlFor="colorPicker"><img src={t} alt="" /></label>
+          </div>
         </div>
+
         <div className={styles.pic}>
           <img src={currentUser.picture} className={styles.userIcon} />
         </div>

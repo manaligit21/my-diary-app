@@ -113,7 +113,7 @@ export default function AllEntriesPage() {
             );
           })
         ) : (
-          <div className={styles.noentry}>No Entries</div>
+          <div className={styles.noentry}>No Entries This Month</div>
         )}
       </div>
     </div>

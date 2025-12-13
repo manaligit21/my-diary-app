@@ -1,4 +1,4 @@
-import styles from "./AllEntriesPage.module.css";
+import styles from "./GraphPage.module.css";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
 import MoodPieChart from "./MoodPieChart";

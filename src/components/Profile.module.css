@@ -57,7 +57,7 @@
 }
 
 .title {
-  color: #c4c5bf;
+  color: rgba(var(--primary-bg));
   font-weight: 700;
   font-size: 20px;
   margin-bottom: 10px;
@@ -65,7 +65,7 @@
 
 .label {
   align-self: flex-start;
-  color: #c4c5bf;
+  color: rgba(var(--primary-bg));
   font-weight: 600;
   font-size: 14px;
 }
@@ -118,4 +118,40 @@
 .backIcon {
   height: 60%;
   width: 18%;
+  padding: 2%;
+}
+
+.switch {
+  height: 12%;
+  width: 12%;
+  border-radius: 50%;
+  background-color: rgba(var(--primary-bg));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+.lab{
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.color {
+  visibility: hidden; /* keeps the input functional but not visible */
+  position: absolute; /* prevents shrinking container */
+  cursor: pointer;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }

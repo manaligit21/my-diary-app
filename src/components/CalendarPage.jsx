@@ -1,4 +1,4 @@
-import styles from "./AllEntriesPage.module.css";
+import styles from "./CalendarPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 import { increment, decrement } from "../store/month";

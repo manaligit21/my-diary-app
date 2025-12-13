@@ -44,14 +44,6 @@ function App() {
         </div>
         <div className={styles["page-title"]}>Balance</div>
 
-        {/* Toggle Button */}
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={() => dispatch(toggleTheme())}
-        >
-          T
-        </div>
-
         {!hideHeaderAndNav && (
           <div
             className={styles.profile}

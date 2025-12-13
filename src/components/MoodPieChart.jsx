@@ -23,7 +23,7 @@ export default function MoodPieChart({ month, year }) {
   }));
 
   if (data.length === 0) {
-    return <div className={styles.noEntries}>No entries this month</div>;
+    return <div className={styles.noEntries}>No Entries This Month</div>;
   }
 
   return (

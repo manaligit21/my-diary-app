@@ -10,7 +10,7 @@
   justify-content: flex-start;
   align-items: center;
   overflow: scroll;
-  background-color: #faf9f6;
+  background-color: rgba(var(--primary-bg));
   background-image: url("../assets/homepage_bg.jpg");
 }
 
@@ -42,12 +42,12 @@
 }
 
 .day {
-  border: 1px white solid;
+  border: 1px rgba(var(--primary-bg)) solid;
   padding: 8px;
   margin: 2px;
   border-radius: 10%;
   cursor: pointer;
-  color: #ffffff;
+  color: rgba(var(--primary-bg));
   font-weight: bold;
 }
 
@@ -61,7 +61,7 @@
 .monthName {
   font-size: 25px;
   font-weight: bold;
-  color: #faf9f6;
+  color: rgba(var(--primary-bg));
 }
 
 .header {
@@ -69,7 +69,6 @@
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-  background-color: #393939;
   color: rgba(var(--primary-bg));
   padding: 5%;
   border-radius: 12px;
