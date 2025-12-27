@@ -26,11 +26,11 @@
 }
 
 .weekdays {
-  margin: 10% 5% 0 5%;
+  /* margin: 10% 5% 0 5%; */
   display: grid;
   font-size: 17px;
   grid-template-columns: repeat(7, 1fr);
-  width: 100%;
+  width: 90%;
 }
 
 .days {
@@ -38,6 +38,7 @@
   display: grid;
   font-size: 20px;
   grid-template-columns: repeat(7, 1fr);
+  width: 90%;
 }
 
 .weekdays div {
