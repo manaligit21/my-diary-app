@@ -112,7 +112,7 @@ body {
 .profile {
   color: #000;
   justify-self: end;
-  /* margin-left: 45%; */
+  margin-left: 45%;
   height: 100%;
   display: flex;
   align-items: center;
