@@ -14,9 +14,9 @@ function EntryPage() {
   const moods = [
     { label: "Awful", color: "#d83333" },
     { label: "Bad", color: "#f39911" },
-    { label: "Okay", color: "#dccb31" },
+    { label: "Okay", color: "#dbc81f" },
     { label: "Nice", color: "#439948" },
-    { label: "Awesome", color: "#15568b" },
+    { label: "Awesome", color: "#006bc3" },
   ];
   const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries";
 

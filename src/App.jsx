@@ -17,20 +17,24 @@ import ShowEntry from "./components/ShowEntry";
 import CalendarPage from "./components/CalendarPage";
 import { EntriesProvider } from "./GlobalContext/Entries";
 import { useEffect } from "react";
+import { useEntries } from "./GlobalContext/Entries";
 import Profile from "./components/Profile";
 import { toggleTheme } from "./store/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
 import GoogleLoginPage from "./components/GoogleLogin";
 function App() {
-  const profilePhoto = localStorage.getItem("profilePhoto");
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useEntries();
   const hideHeaderAndNav =
     location.pathname === "/" || location.pathname === "/sign-up-page";
   const goTo = (path) => navigate(path);
 
-  const dispatch = useDispatch();
   const { mode } = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    console.log("in app jsx", currentUser);
+  }, []);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", mode);
@@ -50,46 +54,48 @@ function App() {
             onClick={() => navigate("/profile-page")}
           >
             <div className={styles.logOut}>
-              <img
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  borderRadius: "50%",
-                  border: "solid 1px",
-                }}
-                src={profilePhoto}
-                alt=""
-              />
+              
+                <img
+                key={currentUser.picture}
+                  src={currentUser.picture}
+                  alt=""
+                  style={{
+                    height: "100%",
+                    maxWidth: "100%",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "1px solid",
+                  }}
+                />
+              
             </div>
           </div>
         )}
       </div>
 
-      <EntriesProvider>
-        <Routes>
-          <Route path="/entry-page" element={<EntryPage />} />
-          <Route path="/calendar-page" element={<CalendarPage />} />
-          <Route path="/graph-page" element={<GraphPage />} />
-          <Route path="/all-entries-page" element={<AllEntriesPage />} />
-          <Route path="/show-entry-page" element={<ShowEntry />} />
-          <Route path="/home-page" element={<HomePage />} />
-          <Route path="/profile-page" element={<Profile />} />
-          <Route path="/" element={<GoogleLoginPage />} />
-        </Routes>
-      </EntriesProvider>
+      <Routes>
+        <Route path="/entry-page" element={<EntryPage />} />
+        <Route path="/calendar-page" element={<CalendarPage />} />
+        <Route path="/graph-page" element={<GraphPage />} />
+        <Route path="/all-entries-page" element={<AllEntriesPage />} />
+        <Route path="/show-entry-page" element={<ShowEntry />} />
+        <Route path="/home-page" element={<HomePage />} />
+        <Route path="/profile-page" element={<Profile />} />
+        <Route path="/" element={<GoogleLoginPage />} />
+      </Routes>
 
       {!hideHeaderAndNav && (
-        <div className={styles["bottom-nav"]}>
+        <div className={styles["bot-nav"]}>
           <div
             className={
               location.pathname === "/home-page"
-                ? styles["item-wrapper-dark"]
-                : styles["item-wrapper"]
+                ? styles["myitem-wrapper-dark"]
+                : styles["myitem-wrapper"]
             }
           >
-            <div className={styles["tab"]} onClick={() => goTo("/home-page")}>
+            <div className={styles["mytab"]} onClick={() => goTo("/home-page")}>
               <img
-                className={styles["tab-icon"]}
+                className={styles["mytab-icon"]}
                 src={
                   location.pathname === "/home-page" ? homeIcon : homeDarkIcon
                 }
@@ -101,16 +107,16 @@ function App() {
           <div
             className={
               location.pathname === "/all-entries-page"
-                ? styles["item-wrapper-dark"]
-                : styles["item-wrapper"]
+                ? styles["myitem-wrapper-dark"]
+                : styles["myitem-wrapper"]
             }
           >
             <div
-              className={styles["tab"]}
+              className={styles["mytab"]}
               onClick={() => goTo("/all-entries-page")}
             >
               <img
-                className={styles["tab-icon"]}
+                className={styles["mytab-icon"]}
                 src={
                   location.pathname === "/all-entries-page"
                     ? notesIcon
@@ -124,13 +130,13 @@ function App() {
           <div
             className={
               location.pathname === "/graph-page"
-                ? styles["item-wrapper-dark"]
-                : styles["item-wrapper"]
+                ? styles["myitem-wrapper-dark"]
+                : styles["myitem-wrapper"]
             }
           >
-            <div className={styles["tab"]} onClick={() => goTo("/graph-page")}>
+            <div className={styles["mytab"]} onClick={() => goTo("/graph-page")}>
               <img
-                className={styles["tab-icon"]}
+                className={styles["mytab-icon"]}
                 src={
                   location.pathname === "/graph-page"
                     ? graphIcon
@@ -144,16 +150,16 @@ function App() {
           <div
             className={
               location.pathname === "/calendar-page"
-                ? styles["item-wrapper-dark"]
-                : styles["item-wrapper"]
+                ? styles["myitem-wrapper-dark"]
+                : styles["myitem-wrapper"]
             }
           >
             <div
-              className={styles["tab"]}
+              className={styles["mytab"]}
               onClick={() => goTo("/calendar-page")}
             >
               <img
-                className={styles["tab-icon"]}
+                className={styles["mytab-icon"]}
                 src={
                   location.pathname === "/calendar-page"
                     ? calendarIcon

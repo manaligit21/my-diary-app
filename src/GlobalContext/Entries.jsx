@@ -15,9 +15,9 @@ export const EntriesProvider = ({ children }) => {
   const COLORS = {
     Awful: "#d83333",
     Bad: "#f39911",
-    Okay: "#dccb31",
+    Okay: "#dbc81f",
     Nice: "#439948",
-    Awesome: "#15568b",
+    Awesome: "#006bc3",
   };
 
   const [entries, setEntries] = useState([]);

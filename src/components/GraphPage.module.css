@@ -34,7 +34,8 @@
   gap: 2%;
   align-items: flex-start;
   justify-content: center;
-  box-sizing: border-box;
+   box-sizing: content-box;
+
   background-color: rgba(var(--primary-bg), 0.3);
 }
 
@@ -68,4 +69,6 @@
   font-size: 22px;
   width: 80%;
   margin: 5%;
+    box-sizing: content-box;
+
 }

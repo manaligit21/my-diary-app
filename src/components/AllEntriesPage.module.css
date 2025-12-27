@@ -14,12 +14,10 @@
 }
 
 .noentry {
-
   text-align: center;
   margin-top: 2rem;
   font-size: 1rem;
   color: rgba(var(--primary-bg));
-
 }
 
 .entries {
@@ -35,7 +33,7 @@
   /* border-radius: 10px; */
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid  rgba(var(--primary-bg)); /* subtle border */
+  border: 1px solid rgba(var(--primary-bg)); /* subtle border */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* gives clean definition */
   overflow: hidden;
   background-color: rgba(var(--primary-bg), 0.3);
@@ -44,7 +42,7 @@
 .dateTime {
   display: flex;
   justify-content: space-between;
-  color: rgba(var(--primary-bg));
+  color: white;
   padding: 2%;
   display: flex;
   align-items: flex-end;
@@ -54,6 +52,7 @@
 .date {
   font-size: 20px;
   font-weight: bold;
+  color: white;
 }
 
 .time {
@@ -63,7 +62,7 @@
 .text {
   margin-top: 8%;
   padding: 2%;
-  color: rgba(var(--primary-bg));
+  color: white;
   word-break: break-word;
 }
 
@@ -83,6 +82,7 @@
   padding: 2%;
   /* border-top: 1px solid; */
   font-weight: bold;
+  color: white;
 }
 
 .navBtns {
@@ -110,6 +110,7 @@
   font-size: 22px;
   width: 80%;
   margin: 5%;
+  box-sizing: content-box;
 }
 
 .empty {

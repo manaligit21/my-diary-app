@@ -7,14 +7,15 @@ body {
   overflow: hidden;
 }
 
-.logOut{
+.logOut {
   border-radius: 15px;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   padding-left: 1%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: content-box;
 }
 
 .container {
@@ -32,33 +33,36 @@ body {
 .header {
   width: 100%;
   background: rgba(var(--primary-bg));
-  color: 393939;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 1% 1%;
   box-sizing: border-box;
   z-index: 10;
+  align-self: baseline;
+  font-weight: bold;
 }
 
 .page-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 2%;
+  height: 100%;
+  /* margin-left: 2%; */
+  /* flex: 6; */
 }
 
 .back {
   height: 60px;
-  width: 60px;
+  max-width: 60px;
   padding-left: 1%;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* flex: 1.5; */
+  box-sizing: content-box;
 }
-
 .back-icon {
   height: 100%;
   width: 100%;
@@ -70,43 +74,48 @@ body {
   width: 100%;
 }
 
-.bottom-nav {
-  background:  rgba(var(--primary-bg));
+.bot-nav {
+  background: rgba(var(--primary-bg));
   display: flex;
   /* padding: 2% 9%; */
   justify-content: space-between;
 }
 
-.tab {
+.mytab {
   height: 30px;
   width: 30px;
   padding: 15px;
+  box-sizing: content-box;
 }
 
-.tab-icon {
+.mytab-icon {
   height: 100%;
   width: 100%;
 }
 
-.item-wrapper {
+.myitem-wrapper {
   width: 25%;
-  background:  rgba(var(--primary-bg));
+  background: rgba(var(--primary-bg));
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.item-wrapper-dark {
+.myitem-wrapper-dark {
   width: 25%;
-  background: #878784;
+  background: #ffffff85;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
-.profile{
+.profile {
   color: #000;
   justify-self: end;
-  margin-left: 45%;
+  /* margin-left: 45%; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex: 1.2; */
 }

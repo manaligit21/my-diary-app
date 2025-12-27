@@ -7,7 +7,7 @@
 .chartTitle {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin: 1rem;
   color: rgba(var(--primary-bg));
 }
 

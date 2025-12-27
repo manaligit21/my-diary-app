@@ -47,7 +47,7 @@
   margin: 2px;
   border-radius: 10%;
   cursor: pointer;
-  color: rgba(var(--primary-bg));
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -75,6 +75,7 @@
   font-size: 22px;
   width: 80%;
   margin: 5%;
+  box-sizing: content-box;
 }
 
 .empty {

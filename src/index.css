@@ -8,6 +8,10 @@
   --text: #393939;
 }
 
+*{
+  font-family: DM sans;
+}
+
 img {
   max-width: 100%;
   height: auto;

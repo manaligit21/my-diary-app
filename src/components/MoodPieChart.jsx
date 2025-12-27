@@ -28,14 +28,14 @@ export default function MoodPieChart({ month, year }) {
 
   return (
     <div className={styles.chartContainer}>
-      <h3 className={styles.chartTitle}>
+      <div className={styles.chartTitle}>
         {`Mood Distribution - ${new Date(year, month).toLocaleString(
           "default",
           {
             month: "long",
           }
         )}`}
-      </h3>
+      </div>
       <PieChart width={320} height={320} className={styles.pieChart}>
         <Pie
           data={data}

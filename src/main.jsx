@@ -5,14 +5,16 @@ import { BrowserRouter, Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
-console.log("store", store);
+import { EntriesProvider } from "./GlobalContext/Entries.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId="1085681295249-hqqscrlk62mqbpqni8c1rsn9ge3apa5u.apps.googleusercontent.com">
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <EntriesProvider>
+          <App />
+        </EntriesProvider>
       </BrowserRouter>
     </Provider>
   </GoogleOAuthProvider>
