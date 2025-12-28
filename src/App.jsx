@@ -33,10 +33,6 @@ function App() {
   const { mode } = useSelector((state) => state.theme);
 
   useEffect(() => {
-    console.log("in app jsx", currentUser);
-  }, []);
-
-  useEffect(() => {
     document.body.setAttribute("data-theme", mode);
   }, [mode]);
 
@@ -48,29 +44,35 @@ function App() {
         </div>
         <div className={styles["page-title"]}>Balance</div>
 
-        {!hideHeaderAndNav && (
-          <div
-            className={styles.profile}
-            onClick={() => navigate("/profile-page")}
-          >
-            <div className={styles.logOut}>
-              
-                <img
+        <div
+          className={styles.profile}
+          style={{
+            visibility: currentUser ? "visible" : "hidden",
+            pointerEvents: currentUser ? "auto" : "none",
+          }}
+          onClick={() => {
+            if (!currentUser.id) return;
+            console.log("dsfsdjf", currentUser);
+            navigate("/profile-page");
+          }}
+        >
+          <div className={styles.logOut}>
+            {currentUser?.picture && (
+              <img
                 key={currentUser.picture}
-                  src={currentUser.picture}
-                  alt=""
-                  style={{
-                    height: "100%",
-                    maxWidth: "100%",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    border: "1px solid",
-                  }}
-                />
-              
-            </div>
+                src={currentUser.picture}
+                alt=""
+                style={{
+                  height: "100%",
+                  maxWidth: "100%",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "1px solid",
+                }}
+              />
+            )}
           </div>
-        )}
+        </div>
       </div>
 
       <Routes>
@@ -134,7 +136,10 @@ function App() {
                 : styles["myitem-wrapper"]
             }
           >
-            <div className={styles["mytab"]} onClick={() => goTo("/graph-page")}>
+            <div
+              className={styles["mytab"]}
+              onClick={() => goTo("/graph-page")}
+            >
               <img
                 className={styles["mytab-icon"]}
                 src={

@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 export default function AllEntriesPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState("");
+  const [selectedMood, setSelectedMood] = useState("ALL");
+
   const year = useSelector((state) => state.month.year);
   const month = useSelector((state) => state.month.month);
   const monthName = new Date(year, month, 1).toLocaleString("default", {
@@ -26,16 +29,32 @@ export default function AllEntriesPage() {
     mood: entry.mood,
   }));
 
-  const daysArray = [];
+  let daysArray = [];
 
   for (let d = 1; d <= daysInMonth; d++) {
     daysArray.push(d);
   }
 
-  let monthMatches = {};
-  for (let i = 0; i < daysArray.length; i++) {
-    monthMatches = entryDates.find((e) => e.month === month && e.year === year);
-  }
+  const passesFilters = (entry) => {
+    if (!entry) return false;
+
+    // month & year (already selected via Redux)
+    if (entry.month !== month || entry.year !== year) return false;
+
+    // mood filter
+    if (selectedMood !== "ALL" && entry.mood !== selectedMood) return false;
+
+    // text search
+    if (
+      searchText &&
+      !entry.entryText.toLowerCase().includes(searchText.toLowerCase())
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+  const monthMatches = entryDates.some((e) => passesFilters(e));
 
   const photoClicked = (index) => {
     setClicked(true);
@@ -45,14 +64,14 @@ export default function AllEntriesPage() {
 
   const todayRef = useRef();
 
-  useEffect(() => {
-    if (todayRef.current) {
-      todayRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (todayRef.current) {
+  //     todayRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "center",
+  //     });
+  //   }
+  // }, []);
   const today = new Date();
   const todayDate = today.toLocaleDateString("en-US", {
     year: "numeric",
@@ -62,6 +81,34 @@ export default function AllEntriesPage() {
   const [clicked, setClicked] = useState(false);
   return (
     <div className={styles.container}>
+      <div style={{ width: "100%", display: "flex" }}>
+        <div
+          className="form-control mr-sm-2 m-3 d-flex align-items-center gap-5"
+          style={{ backgroundColor: "rgba(var(--primary-bg))" }}
+        >
+          <input
+            type="text"
+            placeholder="Search entries..."
+            value={searchText}
+            className="my-1 rounded-1 border border-black w-75"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+
+          <select
+            value={selectedMood}
+            onChange={(e) => setSelectedMood(e.target.value)}
+            className="my-1 rounded-1 border border-black w-50 "
+          >
+            <option value="ALL">All moods</option>
+            <option value="Awesome">Awesome</option>
+            <option value="Nice">Nice</option>
+            <option value="Okay">Okay</option>
+            <option value="Bad">Bad</option>
+            <option value="Awful">Awful</option>
+          </select>
+        </div>
+      </div>
+
       <div className={styles.header}>
         <button className={styles.btn} onClick={() => dispatch(decrement())}>
           ◀
@@ -75,9 +122,9 @@ export default function AllEntriesPage() {
       </div>
       <div className={styles.entries}>
         {monthMatches ? (
-          daysArray.map((day, index) => {
+          [...daysArray].reverse().map((day, index) => {
             const match = entryDates.find(
-              (e) => e.day === day && e.month === month && e.year === year
+              (e) => e.day === day && passesFilters(e)
             );
 
             if (!match) return null;
