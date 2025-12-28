@@ -22,6 +22,8 @@ import Profile from "./components/Profile";
 import { toggleTheme } from "./store/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
 import GoogleLoginPage from "./components/GoogleLogin";
+import AuthGuard from "./AuthGuard";
+
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -76,13 +78,13 @@ function App() {
       </div>
 
       <Routes>
-        <Route path="/entry-page" element={<EntryPage />} />
-        <Route path="/calendar-page" element={<CalendarPage />} />
-        <Route path="/graph-page" element={<GraphPage />} />
-        <Route path="/all-entries-page" element={<AllEntriesPage />} />
-        <Route path="/show-entry-page" element={<ShowEntry />} />
-        <Route path="/home-page" element={<HomePage />} />
-        <Route path="/profile-page" element={<Profile />} />
+        <Route path="/entry-page" element={<AuthGuard><EntryPage /></AuthGuard>} />
+        <Route path="/calendar-page" element={<AuthGuard><CalendarPage /></AuthGuard>} />
+        <Route path="/graph-page" element={<AuthGuard><GraphPage /></AuthGuard>} />
+        <Route path="/all-entries-page" element={<AuthGuard><AllEntriesPage /></AuthGuard>} />
+        <Route path="/show-entry-page" element={<AuthGuard><ShowEntry /></AuthGuard>} />
+        <Route path="/home-page" element={<AuthGuard><HomePage /></AuthGuard>} />
+        <Route path="/profile-page" element={<AuthGuard><Profile /></AuthGuard>} />
         <Route path="/" element={<GoogleLoginPage />} />
       </Routes>
 

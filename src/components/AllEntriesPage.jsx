@@ -81,9 +81,9 @@ export default function AllEntriesPage() {
   const [clicked, setClicked] = useState(false);
   return (
     <div className={styles.container}>
-      <div style={{ width: "100%", display: "flex" }}>
+      <div style={{ width: "102%", display: "flex",  }}>
         <div
-          className="form-control mr-sm-2 m-3 d-flex align-items-center gap-5"
+          className="form-control mr-sm-2 m-4 d-flex align-items-center gap-3"
           style={{ backgroundColor: "rgba(var(--primary-bg))" }}
         >
           <input
