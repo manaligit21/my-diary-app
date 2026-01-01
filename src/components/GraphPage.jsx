@@ -18,7 +18,7 @@ function GraphPage() {
   useEffect(() => {
     const handleBack = (e) => {
       e.preventDefault();
-      navigate("/home-home", { replace: true });
+      navigate("/home-page", { replace: true });
     };
 
     document.addEventListener("backbutton", handleBack);
