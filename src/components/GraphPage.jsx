@@ -18,6 +18,7 @@ function GraphPage() {
   useEffect(() => {
     const handleBack = (e) => {
       e.preventDefault();
+      alert("presed back")
       navigate("/home-page", { replace: true });
     };
 
