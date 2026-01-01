@@ -26,6 +26,18 @@ function CalendarPage() {
     mood: entry.mood,
   }));
 
+  
+    useEffect(() => {
+      const handleBack = (e) => {
+        e.preventDefault();
+        navigate("/home-home", { replace: true });
+      };
+  
+      document.addEventListener("backbutton", handleBack);
+  
+      return () => document.removeEventListener("backbutton", handleBack);
+    }, []);
+
   const daysArray = [];
   function openEntry(index) {
     if (index >= 0) {

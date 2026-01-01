@@ -54,7 +54,6 @@ function App() {
           }}
           onClick={() => {
             if (!currentUser.id) return;
-            console.log("dsfsdjf", currentUser);
             navigate("/profile-page");
           }}
         >

@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { EntriesProvider } from "./GlobalContext/Entries.jsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById("root")).render(
   <GoogleOAuthProvider clientId="1085681295249-hqqscrlk62mqbpqni8c1rsn9ge3apa5u.apps.googleusercontent.com">

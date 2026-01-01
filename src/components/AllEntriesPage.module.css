@@ -121,6 +121,7 @@
 .btn {
   background-color: rgba(var(--primary-bg));
   border: none;
+  color: black;
   border-radius: 8px;
   padding: 6%;
   height: 25px;

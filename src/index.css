@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+
 :root {
   --primary-bg:  216, 217, 210; /* light mode */
   --text: #393939;

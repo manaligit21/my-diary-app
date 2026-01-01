@@ -14,6 +14,17 @@ function GraphPage() {
   const daysArray = [];
   for (let d = 1; d <= daysInMonth; d++) daysArray.push(d);
 
+  useEffect(() => {
+    const handleBack = (e) => {
+      e.preventDefault();
+      navigate("/home-home", { replace: true });
+    };
+
+    document.addEventListener("backbutton", handleBack);
+
+    return () => document.removeEventListener("backbutton", handleBack);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>

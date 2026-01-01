@@ -62,6 +62,17 @@ export default function AllEntriesPage() {
     navigate("/show-entry-page");
   };
 
+  useEffect(() => {
+    const handleBack = (e) => {
+      e.preventDefault();
+      navigate("/home-home", { replace: true });
+    };
+
+    document.addEventListener("backbutton", handleBack);
+
+    return () => document.removeEventListener("backbutton", handleBack);
+  }, []);
+
   const todayRef = useRef();
 
   // useEffect(() => {
@@ -81,23 +92,23 @@ export default function AllEntriesPage() {
   const [clicked, setClicked] = useState(false);
   return (
     <div className={styles.container}>
-      <div style={{ width: "102%", display: "flex",  }}>
+      <div className="w-full flex">
         <div
-          className="form-control mr-sm-2 m-4 d-flex align-items-center gap-3"
+          className="m-4 flex items-center gap-3 rounded-md p-4"
           style={{ backgroundColor: "rgba(var(--primary-bg))" }}
         >
           <input
             type="text"
             placeholder="Search entries..."
             value={searchText}
-            className="my-1 rounded-1 border border-black w-75"
             onChange={(e) => setSearchText(e.target.value)}
+            className="w-3/4 rounded border border-black px-3 py-2 text-lg outline-none focus:ring-2 focus:ring-black"
           />
 
           <select
             value={selectedMood}
             onChange={(e) => setSelectedMood(e.target.value)}
-            className="my-1 rounded-1 border border-black w-50 "
+            className="w-1/2 rounded border border-black px-3 py-2 text-base outline-none focus:ring-2 focus:ring-black"
           >
             <option value="ALL">All moods</option>
             <option value="Awesome">Awesome</option>
