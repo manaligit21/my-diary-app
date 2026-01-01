@@ -2,12 +2,13 @@ import styles from "./Profile.module.css"; // ✅
 import backIcon from "../assets/back.png";
 import t from "../assets/theme.png";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 
 function Profile() {
   const navigate = useNavigate();
   const { setUserId, userId, currentUser, setCurrentUser } = useEntries();
+    const location = useLocation();
 
   const back = () => {
     navigate("/home-page");
@@ -38,9 +39,9 @@ function Profile() {
     <div className={styles.screen}>
       <div className={styles.profileCard}>
         <div className={styles.top}>
-          <div className={styles.back} onClick={back}>
+          {/* <div className={styles.back} onClick={back}>
             <img className={styles.backIcon} src={backIcon} alt="" />
-          </div>
+          </div> */}
           <div className={styles.switch}>
             <input id='colorPicker' onChange={handleColorChange} className={styles.color} type="color" />
             <label className={styles.lab} htmlFor="colorPicker"><img src={t} alt="" /></label>
