@@ -2,6 +2,7 @@ import styles from "./GraphPage.module.css";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
 import MoodPieChart from "./MoodPieChart";
+import { useEffect } from "react";
 function GraphPage() {
   const dispatch = useDispatch();
   const year = useSelector((state) => state.month.year);
