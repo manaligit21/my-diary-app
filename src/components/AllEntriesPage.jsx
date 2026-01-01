@@ -63,17 +63,17 @@ export default function AllEntriesPage() {
   };
 
   useEffect(() => {
-    const handleBack = (e) => {
-      e.preventDefault();
-            alert("presed back")
-
+    const handleBack = () => {
+      alert("Back button pressed");
       navigate("/home-page", { replace: true });
     };
 
-    document.addEventListener("backbutton", handleBack);
+    window.addEventListener("popstate", handleBack);
 
-    return () => document.removeEventListener("backbutton", handleBack);
-  }, []);
+    return () => {
+      window.removeEventListener("popstate", handleBack);
+    };
+  }, [navigate]);
 
   const todayRef = useRef();
 
