@@ -1,12 +1,40 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import bg from "../assets/homepage_bg.jpg";
 import { useEntries } from "../GlobalContext/Entries";
+import { useEffect, useRef } from "react";
 
 function GoogleLoginPage() {
   const navigate = useNavigate();
   const { setUserId, setCurrentUser, setAllUsers, allUsers, setProfilePhoto } =
     useEntries();
+  const location = useLocation();
+  const lastBack = useRef(0);
+
+  useEffect(() => {
+    const onBack = () => {
+      const now = Date.now();
+
+      if (location.pathname === "/") {
+        if (now - lastBack.current < 2000) {
+          // Allow browser to handle back naturally
+          return;
+        } else {
+          lastBack.current = now;
+          alert("Press back again to leave site");
+          window.history.pushState(null, "", location.pathname);
+        }
+      }
+    };
+
+    window.history.pushState(null, "", location.pathname);
+    window.addEventListener("popstate", onBack);
+
+    return () => {
+      window.removeEventListener("popstate", onBack);
+    };
+  }, [location.pathname]);
+
   const USER_API_URL =
     "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/users";
 
