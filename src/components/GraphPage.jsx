@@ -3,8 +3,10 @@ import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
 import MoodPieChart from "./MoodPieChart";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 function GraphPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const year = useSelector((state) => state.month.year);
   const month = useSelector((state) => state.month.month);
   const monthName = new Date(year, month, 1).toLocaleString("default", {
