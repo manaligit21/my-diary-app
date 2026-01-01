@@ -18,17 +18,19 @@ function GraphPage() {
   for (let d = 1; d <= daysInMonth; d++) daysArray.push(d);
 
   useEffect(() => {
-    const handleBack = () => {
-      alert("Back button pressed");
-      navigate("/home-page", { replace: true });
+    // push dummy state so back always triggers popstate
+    window.history.pushState(null, "", location.pathname);
+
+    const onBack = () => {
+      navigate(redirectTo, { replace: true });
     };
 
-    window.addEventListener("popstate", handleBack);
+    window.addEventListener("popstate", onBack);
 
     return () => {
-      window.removeEventListener("popstate", handleBack);
+      window.removeEventListener("popstate", onBack);
     };
-  }, [navigate]);
+  }, [navigate, redirectTo, location.pathname]);
 
   return (
     <div className={styles.container}>
