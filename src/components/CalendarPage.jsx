@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function CalendarPage() {
   const navigate = useNavigate();
@@ -26,17 +27,16 @@ function CalendarPage() {
     mood: entry.mood,
   }));
 
-  
-    useEffect(() => {
-      const handleBack = (e) => {
-        e.preventDefault();
-        navigate("/home-home", { replace: true });
-      };
-  
-      document.addEventListener("backbutton", handleBack);
-  
-      return () => document.removeEventListener("backbutton", handleBack);
-    }, []);
+  useEffect(() => {
+    const handleBack = (e) => {
+      e.preventDefault();
+      navigate("/home-home", { replace: true });
+    };
+
+    document.addEventListener("backbutton", handleBack);
+
+    return () => document.removeEventListener("backbutton", handleBack);
+  }, []);
 
   const daysArray = [];
   function openEntry(index) {
