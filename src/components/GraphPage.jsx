@@ -2,11 +2,13 @@ import styles from "./GraphPage.module.css";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
 import MoodPieChart from "./MoodPieChart";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 function GraphPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const year = useSelector((state) => state.month.year);
   const month = useSelector((state) => state.month.month);
   const monthName = new Date(year, month, 1).toLocaleString("default", {
@@ -17,12 +19,16 @@ function GraphPage() {
   const daysArray = [];
   for (let d = 1; d <= daysInMonth; d++) daysArray.push(d);
 
+  const hasPushedRef = useRef(false);
+
   useEffect(() => {
-    // push dummy state so back always triggers popstate
-    window.history.pushState(null, "", location.pathname);
+    if (!hasPushedRef.current) {
+      window.history.pushState(null, "", location.pathname);
+      hasPushedRef.current = true;
+    }
 
     const onBack = () => {
-      navigate(redirectTo, { replace: true });
+      navigate("/home-page", { replace: true });
     };
 
     window.addEventListener("popstate", onBack);
@@ -30,7 +36,7 @@ function GraphPage() {
     return () => {
       window.removeEventListener("popstate", onBack);
     };
-  }, [navigate, redirectTo, location.pathname]);
+  }, [navigate]);
 
   return (
     <div className={styles.container}>

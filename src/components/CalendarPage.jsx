@@ -1,12 +1,13 @@
 import styles from "./CalendarPage.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function CalendarPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const year = useSelector((state) => state.month.year);
   const month = useSelector((state) => state.month.month);
@@ -27,12 +28,16 @@ function CalendarPage() {
     mood: entry.mood,
   }));
 
+  const hasPushedRef = useRef(false);
+
   useEffect(() => {
-    // push dummy state so back always triggers popstate
-    window.history.pushState(null, "", location.pathname);
+    if (!hasPushedRef.current) {
+      window.history.pushState(null, "", location.pathname);
+      hasPushedRef.current = true;
+    }
 
     const onBack = () => {
-      navigate(redirectTo, { replace: true });
+      navigate("/home-page", { replace: true });
     };
 
     window.addEventListener("popstate", onBack);
@@ -40,7 +45,7 @@ function CalendarPage() {
     return () => {
       window.removeEventListener("popstate", onBack);
     };
-  }, [navigate, redirectTo, location.pathname]);
+  }, [navigate]);
 
   const daysArray = [];
   function openEntry(index) {

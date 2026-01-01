@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./AllEntriesPage.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 import { increment, decrement } from "../store/month";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 export default function AllEntriesPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+    const location = useLocation();
+
   const [searchText, setSearchText] = useState("");
   const [selectedMood, setSelectedMood] = useState("ALL");
 
@@ -61,13 +63,16 @@ export default function AllEntriesPage() {
     setCurrentIndex(index);
     navigate("/show-entry-page");
   };
+  const hasPushedRef = useRef(false);
 
   useEffect(() => {
-    // push dummy state so back always triggers popstate
-    window.history.pushState(null, "", location.pathname);
+    if (!hasPushedRef.current) {
+      window.history.pushState(null, "", location.pathname);
+      hasPushedRef.current = true;
+    }
 
     const onBack = () => {
-      navigate(redirectTo, { replace: true });
+      navigate("/home-page", { replace: true });
     };
 
     window.addEventListener("popstate", onBack);
@@ -75,7 +80,7 @@ export default function AllEntriesPage() {
     return () => {
       window.removeEventListener("popstate", onBack);
     };
-  }, [navigate, redirectTo, location.pathname]);
+  }, [navigate]);
 
   const todayRef = useRef();
 
