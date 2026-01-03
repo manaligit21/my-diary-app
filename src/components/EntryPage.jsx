@@ -57,7 +57,7 @@ function EntryPage() {
       day: "numeric",
       year: "numeric",
     });
-    if (data.find((i) => i.date === selectedDate)) {
+    if (data.find((i) => i.date === selectedDate && i.userId === userId)) {
       alert("alreday have entry for this date");
       return;
     }
