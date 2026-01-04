@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import styles from "./EntryPage.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 
 function EntryPage() {
-  const [entryText, setEntryText] = useState("");
-  const [mood, setMood] = useState("");
+  function toInputDate(dateStr) {
+ const d = new Date(dateStr + " 12:00"); // force local noon
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;}
+
+  const location = useLocation();
+  const passedEntry = location.state?.entry;
+
+  const [entryText, setEntryText] = useState(passedEntry?.entryText);
+  const [mood, setMood] = useState(passedEntry?.mood);
   const [file, setFile] = useState(null);
-  const { setEntries, userId } = useEntries();
-  const [date, setDate] = useState("");
+  const { setEntries, userId, ENTRY_URL } = useEntries();
+  const [date, setDate] = useState(toInputDate(passedEntry?.date));
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const moods = [
@@ -58,8 +68,39 @@ function EntryPage() {
       year: "numeric",
     });
     if (data.find((i) => i.date === selectedDate && i.userId === userId)) {
-      alert("alreday have entry for this date");
-      return;
+      if (!passedEntry) {
+        alert("alreday have entry for this date");
+        return;
+      }
+
+      if (passedEntry) {
+        const updatedEntry = {
+          entryText,
+          mood,
+          date: new Date(date).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
+          time: formatTime(new Date()),
+          imgUrl: file ? URL.createObjectURL(file) : "",
+          userId,
+        };
+        fetch(ENTRY_URL + userId + "/entries/" + passedEntry.id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedEntry),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setEntries((prev) => prev.map((e) => (e.id == data.id ? data : e)));
+            navigate("/show-entry-page", { state: { entry: data } });
+          })
+          .catch((error) => console.error("eror", error));
+          return 
+        }
     }
     const newEntry = {
       entryText,
