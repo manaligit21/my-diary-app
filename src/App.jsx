@@ -86,7 +86,6 @@ function App() {
         <Route path="/profile-page" element={<AuthGuard><Profile /></AuthGuard>} />
         <Route path="/" element={<GoogleLoginPage />} />
       </Routes>
-
       {!hideHeaderAndNav && (
         <div className={styles["bot-nav"]}>
           <div

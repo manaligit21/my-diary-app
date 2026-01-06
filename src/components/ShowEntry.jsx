@@ -10,6 +10,7 @@ function ShowEntry() {
   const { entries, currentIndex, COLORS, ENTRY_URL, setEntries, userId } =
     useEntries();
   const location = useLocation();
+  const [showdelete, setShowDelete] = useState(false);
   const passedEntry = location.state?.entry;
   const currentEntry = passedEntry || entries[currentIndex];
 
@@ -33,7 +34,6 @@ function ShowEntry() {
       });
   }
   const [showPhoto, setShowPhoto] = useState(false);
-  const { fromCal, setFromCal } = useEntries();
   const photoClicked = () => {
     if (currentEntry.media) {
       setShowPhoto(true);
@@ -48,7 +48,7 @@ function ShowEntry() {
             <div className={styles.back} onClick={toEntry}>
               <img className={styles.backIcon} src={editIcon} alt="" />
             </div>
-            <div className={styles.back} onClick={delEntry}>
+            <div className={styles.back} onClick={() => setShowDelete(true)}>
               <img className={styles.backIcon} src={delIcon} alt="" />
             </div>
           </div>
@@ -74,6 +74,22 @@ function ShowEntry() {
         <div className={styles.overlay} onClick={() => setShowPhoto(false)}>
           <div className={styles.wrap}>
             <img className={styles.image} src={currentEntry.media} alt="" />
+          </div>
+        </div>
+      )}
+      {showdelete && (
+        <div
+          className={styles.deletePopUp}
+          onClick={() => setShowDelete(false)}
+        >
+          <div
+            className={styles.delWrapper}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.popupText}>Are You Sure ?</div>
+            <div className={styles.okBtn} onClick={delEntry}>
+              Yes
+            </div>
           </div>
         </div>
       )}

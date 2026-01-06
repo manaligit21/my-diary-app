@@ -4,11 +4,13 @@ import t from "../assets/theme.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
+import { useState } from "react";
 
 function Profile() {
   const navigate = useNavigate();
   const { setUserId, userId, currentUser, setCurrentUser } = useEntries();
-    const location = useLocation();
+  const location = useLocation();
+  const [showdelete, setShowDelete] = useState(false);
 
   const back = () => {
     navigate("/home-page");
@@ -43,16 +45,27 @@ function Profile() {
             <img className={styles.backIcon} src={backIcon} alt="" />
           </div> */}
           <div className={styles.switch}>
-            <input id='colorPicker' onChange={handleColorChange} className={styles.color} type="color" />
-            <label className={styles.lab} htmlFor="colorPicker"><img src={t} alt="" /></label>
+            <input
+              id="colorPicker"
+              onChange={handleColorChange}
+              className={styles.color}
+              type="color"
+            />
+            <label className={styles.lab} htmlFor="colorPicker">
+              <img src={t} alt="" />
+            </label>
           </div>
         </div>
 
         <div className={styles.pic}>
-          <img key={currentUser.picture} src={currentUser?.picture} className={styles.userIcon} />
+          <img
+            key={currentUser.picture}
+            src={currentUser?.picture}
+            className={styles.userIcon}
+          />
         </div>
 
-        <h2 className={styles.title} onClick={logout}>
+        <h2 className={styles.title} onClick={()=> setShowDelete(true)}>
           Log out
         </h2>
 
@@ -62,6 +75,22 @@ function Profile() {
         <label className={styles.label}>Email</label>
         <div className={styles.input}>{currentUser.email}</div>
       </div>
+      {showdelete && (
+        <div
+          className={styles.deletePopUp}
+          onClick={() => setShowDelete(false)}
+        >
+          <div
+            className={styles.delWrapper}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.popupText}>Are You Sure ?</div>
+            <div className={styles.okBtn} onClick={logout}>
+              Yes
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
