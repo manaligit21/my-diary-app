@@ -47,6 +47,11 @@ function EntryPage() {
     setShowDelete(true);
   };
 
+  const closePopup = () => {
+    setShowDelete(false);
+    window.history.pushState(null, "", location.pathname);
+  };
+
   useEffect(() => {
     if (!hasPushedRef.current) {
       window.history.pushState(null, "", location.pathname);
@@ -243,7 +248,7 @@ function EntryPage() {
       {showdelete && (
         <div
           className={styles.deletePopUp}
-          onClick={() => setShowDelete(false)}
+          onClick={closePopup}
         >
           <div
             className={styles.delWrapper}
