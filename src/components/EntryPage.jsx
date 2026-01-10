@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./EntryPage.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEntries } from "../GlobalContext/Entries";
 
 function EntryPage() {
   function toInputDate(dateStr) {
- const d = new Date(dateStr + " 12:00"); // force local noon
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;}
+    const d = new Date(dateStr + " 12:00"); // force local noon
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  const [showdelete, setShowDelete] = useState(false);
 
   const location = useLocation();
   const passedEntry = location.state?.entry;
@@ -29,12 +31,34 @@ function EntryPage() {
     { label: "Awesome", color: "#006bc3" },
   ];
   const API_URL = "https://68fa6509ef8b2e621e7fda19.mockapi.io/diary/entries";
+  const hasPushedRef = useRef(false);
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+
+  const onBack = () => {
+    navigate("/home-page", { replace: true });
+  };
+
+  const onPopState = () => {
+    setShowDelete(true);
+  };
+
+  useEffect(() => {
+    if (!hasPushedRef.current) {
+      window.history.pushState(null, "", location.pathname);
+      hasPushedRef.current = true;
+    }
+
+    window.addEventListener("popstate", onPopState);
+
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+    };
+  }, [navigate]);
 
   const optionSelected = (mood) => {
     console.log(mood);
@@ -99,8 +123,8 @@ function EntryPage() {
             navigate("/show-entry-page", { state: { entry: data } });
           })
           .catch((error) => console.error("eror", error));
-          return 
-        }
+        return;
+      }
     }
     const newEntry = {
       entryText,
@@ -216,6 +240,22 @@ function EntryPage() {
           </div>
         </div>
       </div>
+      {showdelete && (
+        <div
+          className={styles.deletePopUp}
+          onClick={() => setShowDelete(false)}
+        >
+          <div
+            className={styles.delWrapper}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.popupText}>Are You Sure ?</div>
+            <div className={styles.okBtn} onClick={onBack}>
+              Yes
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
